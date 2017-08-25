@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package listaexercicios;
+package br.estacio.ListaDeExecicios;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,61 +29,62 @@ public class Ex2Planeta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
+        lblPesoterra = new javax.swing.JLabel();
+        butCalcularpeso = new javax.swing.JButton();
+        lblSelPlaneta = new javax.swing.JLabel();
+        txtPeso = new javax.swing.JTextField();
+        butMercurio = new javax.swing.JRadioButton();
+        butVenus = new javax.swing.JRadioButton();
+        butMarte = new javax.swing.JRadioButton();
+        butJupiter = new javax.swing.JRadioButton();
+        butUrano = new javax.swing.JRadioButton();
+        butSaturno = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(450, 250));
 
-        jLabel1.setText("Peso na Terra (kg):");
+        lblPesoterra.setText("Peso na Terra (kg):");
 
-        jButton1.setText("Calcular Peso");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        butCalcularpeso.setText("Calcular Peso");
+        butCalcularpeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                butCalcularpesoActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Selecione o Planeta:");
+        lblSelPlaneta.setText("Selecione o Planeta:");
 
-        jRadioButton1.setText("Mercúrio");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        butMercurio.setText("Mercúrio");
+        butMercurio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                butMercurioActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setText("Vênus");
+        butVenus.setText("Vênus");
 
-        jRadioButton4.setText("Marte");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        butMarte.setText("Marte");
+        butMarte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                butMarteActionPerformed(evt);
             }
         });
 
-        jRadioButton5.setText("Júpiter");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        butJupiter.setText("Júpiter");
+        butJupiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                butJupiterActionPerformed(evt);
             }
         });
 
-        jRadioButton6.setText("Urano");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        butUrano.setText("Urano");
+        butUrano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                butUranoActionPerformed(evt);
             }
         });
 
-        jRadioButton7.setText("Saturno");
+        butSaturno.setText("Saturno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,77 +93,108 @@ public class Ex2Planeta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton7)
-                            .addComponent(jRadioButton6)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(butMercurio)
+                                    .addComponent(butVenus))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(butMarte)
+                                    .addComponent(butJupiter))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(butSaturno)
+                                    .addComponent(butUrano)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSelPlaneta)
+                                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(butCalcularpeso, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(65, 65, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, Short.MAX_VALUE))
+                        .addComponent(lblPesoterra)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(lblPesoterra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(butCalcularpeso))
                 .addGap(17, 17, 17)
-                .addComponent(jLabel2)
+                .addComponent(lblSelPlaneta)
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton7))
+                    .addComponent(butMercurio)
+                    .addComponent(butMarte)
+                    .addComponent(butSaturno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(butVenus)
+                    .addComponent(butJupiter)
+                    .addComponent(butUrano, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void butMercurioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butMercurioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_butMercurioActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void butMarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butMarteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+    }//GEN-LAST:event_butMarteActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void butJupiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butJupiterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+    }//GEN-LAST:event_butJupiterActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void butUranoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butUranoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+    }//GEN-LAST:event_butUranoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       double pesoDaTerra = Double.parseDouble(jTextField1.getText());
-        if(jRadioButton1.isSelected()){
-           double peso = pesoDaTerra /10 * 0.37;
-            System.out.println(""+peso);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void butCalcularpesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCalcularpesoActionPerformed
+       double pesoDaTerra = Double.parseDouble(txtPeso.getText());
+       if(butMercurio.isSelected()){
+        double peso = pesoDaTerra /10 * 0.37;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Mercúrio é: " +peso);
+            
+        }
+        
+        else if (butVenus.isSelected()){
+            double peso = pesoDaTerra /10 * 0.88;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Vênus é: " +peso);
+          
+                    }
+        else if (butMarte.isSelected()){
+            double peso = pesoDaTerra /10 * 0.38;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Marte é: " +peso);
+            
+                    }
+       else if (butJupiter.isSelected()){
+            double peso = pesoDaTerra /10 * 2.64;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Júpiter é: " +peso);
+            
+                    }
+       else if (butSaturno.isSelected()){
+            double peso = pesoDaTerra /10 * 1.15;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Saturno é: " +peso);
+            
+                    }
+       else if (butUrano.isSelected()){
+            double peso = pesoDaTerra /10 * 1.17;
+            JOptionPane.showMessageDialog(butCalcularpeso,"O seu peso em Urano é: " +peso);
+            
+         }
+    }//GEN-LAST:event_butCalcularpesoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,15 +233,15 @@ public class Ex2Planeta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton butCalcularpeso;
+    private javax.swing.JRadioButton butJupiter;
+    private javax.swing.JRadioButton butMarte;
+    private javax.swing.JRadioButton butMercurio;
+    private javax.swing.JRadioButton butSaturno;
+    private javax.swing.JRadioButton butUrano;
+    private javax.swing.JRadioButton butVenus;
+    private javax.swing.JLabel lblPesoterra;
+    private javax.swing.JLabel lblSelPlaneta;
+    private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
 }
