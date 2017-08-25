@@ -43,9 +43,9 @@
                   </Group>
                   <Component id="butVerificarTipo" pref="140" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Component id="resultado" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="119" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <Component id="lblMensagem" pref="341" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +61,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLado2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtLado2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="resultado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMensagem" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -108,7 +108,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butVerificarTipoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="resultado">
+    <Component class="javax.swing.JLabel" name="lblMensagem">
     </Component>
   </SubComponents>
 </Form>

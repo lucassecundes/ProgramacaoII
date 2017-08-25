@@ -40,7 +40,7 @@ public class Ex1 extends javax.swing.JFrame {
         txtLado2 = new javax.swing.JTextField();
         txtLado3 = new javax.swing.JTextField();
         butVerificarTipo = new javax.swing.JButton();
-        resultado = new javax.swing.JLabel();
+        lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,9 +82,9 @@ public class Ex1 extends javax.swing.JFrame {
                             .addComponent(txtLado2)
                             .addComponent(txtLado3, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
                     .addComponent(butVerificarTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                .addGap(61, 61, 61)
-                .addComponent(resultado)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +97,7 @@ public class Ex1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLado2)
                     .addComponent(txtLado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resultado))
+                    .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLado3)
@@ -109,20 +109,35 @@ public class Ex1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void CalcularEquilatero(double nun1, double nun2, double nun3){
-    
-        if (txtLado1 == txtLado2 && txtLado2 == txtLado3);
-                    resultado.setText(String.valueOf(resultado));
-        
-}
+
+
     private void txtLado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLado1ActionPerformed
-        Scanner input = new Scanner (System.in);
-        int num = input.nextInt();
+        
     }//GEN-LAST:event_txtLado1ActionPerformed
 
     private void butVerificarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVerificarTipoActionPerformed
-        // TODO add your handling code here:
+        
+
+        int lbllado1 = Integer.parseInt(txtLado1.getText());
+        int lbllado2 = Integer.parseInt(txtLado2.getText());
+        int lbllado3 = Integer.parseInt(txtLado3.getText());
+        
+        if (lbllado1 == 0 || lbllado2 == 0 || lbllado3 ==0){
+            lblMensagem.setText("Não é um triangulo. Pois não possui lado igual a zero.");
+        }
+            
+        
+        else if (lbllado1 == lbllado2 && lbllado1 == lbllado3 && lbllado2 == lbllado3){
+		lblMensagem.setText ("Três lados iguais . Trata-se de um Triangulo Equilatero");
+	}
+         else if (lbllado1 == lbllado2 || lbllado1 == lbllado3 || lbllado2 == lbllado3){
+             lblMensagem.setText ("Triangulo isórseles");
+         }
+        else if (lbllado1 != lbllado2 && lbllado1 != lbllado3 && lbllado2 != lbllado3){
+             lblMensagem.setText ("Triangulo Escaleno");
+        }
+        
+    
     }//GEN-LAST:event_butVerificarTipoActionPerformed
 
     /**
@@ -165,7 +180,7 @@ public class Ex1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblLado1;
     private javax.swing.JLabel lblLado2;
     private javax.swing.JLabel lblLado3;
-    private javax.swing.JLabel resultado;
+    private javax.swing.JLabel lblMensagem;
     private javax.swing.JTextField txtLado1;
     private javax.swing.JTextField txtLado2;
     private javax.swing.JTextField txtLado3;
