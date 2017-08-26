@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author aluno
+ * @author Lucas
  */
 public class Ex2Planeta extends javax.swing.JFrame {
 
@@ -29,6 +29,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lblPesoterra = new javax.swing.JLabel();
         butCalcularpeso = new javax.swing.JButton();
         lblSelPlaneta = new javax.swing.JLabel();
@@ -54,6 +55,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
 
         lblSelPlaneta.setText("Selecione o Planeta:");
 
+        buttonGroup1.add(butMercurio);
         butMercurio.setText("Mercúrio");
         butMercurio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,8 +63,10 @@ public class Ex2Planeta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(butVenus);
         butVenus.setText("Vênus");
 
+        buttonGroup1.add(butMarte);
         butMarte.setText("Marte");
         butMarte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +74,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(butJupiter);
         butJupiter.setText("Júpiter");
         butJupiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +82,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(butUrano);
         butUrano.setText("Urano");
         butUrano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +90,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(butSaturno);
         butSaturno.setText("Saturno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,6 +247,7 @@ public class Ex2Planeta extends javax.swing.JFrame {
     private javax.swing.JRadioButton butSaturno;
     private javax.swing.JRadioButton butUrano;
     private javax.swing.JRadioButton butVenus;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel lblPesoterra;
     private javax.swing.JLabel lblSelPlaneta;
     private javax.swing.JTextField txtPeso;
