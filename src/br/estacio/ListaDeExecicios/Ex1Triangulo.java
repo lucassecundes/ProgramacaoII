@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author alunoadm
+ * @author Lucas
  */
 public class Ex1Triangulo extends javax.swing.JFrame {
 
