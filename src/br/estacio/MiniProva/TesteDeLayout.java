@@ -5,6 +5,8 @@
  */
 package br.estacio.MiniProva;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author aluno
@@ -15,7 +17,7 @@ public class TesteDeLayout {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        JFrame janela = new ExercicioBorderLayout();
     }
     
 }
