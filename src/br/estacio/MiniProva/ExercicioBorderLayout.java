@@ -11,81 +11,79 @@ public class ExercicioBorderLayout extends JFrame {
     
     public ExercicioBorderLayout() {
         
-	//Paineis
-	JPanel P = new JPanel();
-        JPanel A = new JPanel();
-        JPanel N = new JPanel();
-        JPanel E = new JPanel();
-        JPanel L = new JPanel();
+	//Declarando os paineis
+	JPanel a = new JPanel();
+        JPanel b = new JPanel();
+        JPanel d = new JPanel();
+        JPanel f = new JPanel();
+        JPanel g = new JPanel();
         
-	//Botoes
-	JButton B1 = new JButton ("Botão 1");
-        JButton B2 = new JButton ("Botão 2");
-        JButton B3 = new JButton ("Botão 3");
-        JButton B4 = new JButton ("Botão 4");
-        JButton B5 = new JButton ("           Botão 5           ");
-        JButton B6 = new JButton ("           Botão 6           ");
-        JButton B7 = new JButton ("           Botão 7           ");
-        JButton B8 = new JButton ("           Botão 8           ");
-        JButton B9 = new JButton ("Botão 9");
-        JButton B0 = new JButton ("Botão 0");
+	//Declarando os botoes
+	JButton Botaon1 = new JButton ("Botão Norte 1");
+        JButton Botaon2 = new JButton ("Botão Norte 2");
+        JButton Botaos1 = new JButton ("Botão Sul 1");
+        JButton Botaos2 = new JButton ("Botão Sul 2");
+        JButton Botaol1 = new JButton ("Botão Leste 1");
+        JButton Botaol2 = new JButton ("Botão Leste 2");
+        JButton Botaoo1 = new JButton ("Botão Oeste 1");
+        JButton Botaoo2 = new JButton ("Botão Oeste 2");
+        JButton Botaoc1 = new JButton ("Botão Centro 1");
+        JButton Botaoc2 = new JButton ("Botão Centro 2");
         
-	//Localização de cada Painel
-	JLabel L1 = new JLabel("                                                                        Parte Sul");
-        JLabel L2 = new JLabel("                     Parte Central");
-        JLabel L3 = new JLabel("            Parte Oeste");
-        JLabel L4 = new JLabel("            Parte Leste");
-        JLabel L5 = new JLabel("                                                                      Parte Norte");
+	//Onde vai ficar cada painel
+	JLabel Label1 = new JLabel("                                                                            Sul");
+        JLabel Label2 = new JLabel("                                    Centro");
+        JLabel Label3 = new JLabel("             Oeste");
+        JLabel Label4 = new JLabel("             Leste");
+        JLabel Label5 = new JLabel("                                                                         Norte");
         
 	//Layouts
-	BorderLayout m = new BorderLayout();
+	BorderLayout n = new BorderLayout();
         BorderLayout S = new BorderLayout();
-        BorderLayout e = new BorderLayout();
+        BorderLayout l = new BorderLayout();
         BorderLayout o = new BorderLayout();
         BorderLayout C = new BorderLayout();
         
 	//Propriedades
-        super.setTitle("Exercicio Programação ");
-        
-        P.setLayout(m);
-        P.add(B1, m.NORTH);
-        P.add(B2, m.SOUTH);
-        P.add(L5, m.CENTER);
-        add(P, m.NORTH);
-        
-        A.setLayout(S);
-        A.add(B3, S.NORTH);
-        A.add(B4, S.SOUTH);
-        A.add(L1, S.CENTER);
-        add(A, S.SOUTH);
-        
-        N.setLayout(o);
-        N.add(B5, o.NORTH);
-        N.add(B6, o.SOUTH);
-        N.add(L4, o.CENTER);
-        add(N, o.EAST);
-        
-        E.setLayout(e);
-        E.add(B7, e.NORTH);
-        E.add(B8, e.SOUTH);
-        E.add(L3, e.CENTER);
-        add(E, e.WEST);
-        
-        L.setLayout(C);
-        L.add(B9, C.NORTH);
-        L.add(B0, C.SOUTH);
-        L.add(L2, C.CENTER);
-        add(L, C.CENTER);
-        
-        
-        
-   }
-	//Execução do Aplicativo java
+        super.setTitle("Exercicio Border Layout ");
+        //Norte
+        a.setLayout(n);
+        a.add(Botaon1, n.NORTH);
+        a.add(Botaon2, n.SOUTH);
+        a.add(Label5, n.CENTER);
+        add(a, n.NORTH);
+        //Sul
+        b.setLayout(S);
+        b.add(Botaos1, S.NORTH);
+        b.add(Botaos2, S.SOUTH);
+        b.add(Label1, S.CENTER);
+        add(b, S.SOUTH);
+        //Oeste
+        d.setLayout(o);
+        d.add(Botaol1, o.NORTH);
+        d.add(Botaol2, o.SOUTH);
+        d.add(Label4, o.CENTER);
+        add(d, o.EAST);
+        //Leste
+        f.setLayout(l);
+        f.add(Botaoo1, l.NORTH);
+        f.add(Botaoo2, l.SOUTH);
+        f.add(Label3, l.CENTER);
+        add(f, l.WEST);
+        //Centro
+        g.setLayout(C);
+        g.add(Botaoc1, C.NORTH);
+        g.add(Botaoc2, C.SOUTH);
+        g.add(Label2, C.CENTER);
+        add(g, C.CENTER);
+        }
+    
+	//Execução
       public static void main(String args[]) {
-        ExercicioBorderLayout B = new ExercicioBorderLayout();
-        B.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        B.setSize(500,250); 
-        B.setVisible(true);
+        ExercicioBorderLayout Border = new ExercicioBorderLayout();
+        Border.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Border.setSize(500,300); 
+        Border.setVisible(true);
     }
 
 }
