@@ -6,7 +6,11 @@
 package br.estacio.Banco;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,11 +29,26 @@ public class DaoUsuario {
     }
     
     //salvar
-    public boolean salvarUsuario(Usuario usuario){
+    public int salvarUsuario(Usuario usuario){
+        String sql = " INSERT "
+                    + "INTO "
+                    + " tb_usuario (nome, sobrenome)"
+                    + "VALUES (?, ?) ";
+        try {
+            PreparedStatement preparacaoDaInstrucao = conexao.prepareStatement("sql");
+            // De acordo com a posição do ponto de interrogação na SQl e o tipo de dado
+            preparacaoDaInstrucao.setString(1, usuario.getNome());
+            preparacaoDaInstrucao.setString(1, usuario.getSobrenome());
+            
+            return preparacaoDaInstrucao.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
         
-        return false;
     }
-    
     //excluir
      public boolean excluirUsuario(Usuario usuario){
         
