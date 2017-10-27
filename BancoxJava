@@ -1,3 +1,6 @@
+create database progii_bd
+
+user progii_bd
 select * from tb_usuario where nome
 
 select nome from tb_usuario
@@ -8,7 +11,7 @@ select nome from tb_usuario
 		sobrenome varchar (255) not null
 )
 
-create table endereco(
+create table tb_endereco(
 			id_endereco int not null primary key,
 			logradouro varchar(255) not null,
             complemento varchar(255) null,
@@ -19,16 +22,9 @@ create table endereco(
  )
 
 
-create table usuario(
-			id_usuario int not null primary key,
-            nome varchar(255) not null,
-            sobrenome varchar(255) not null
-            
-)
-
 select * from usuario
 
-create table perfil(
+create table tb_perfil(
 			id_perfil int not null primary key,
             nome varchar(255) not null,
             discricao varchar(255) not null
