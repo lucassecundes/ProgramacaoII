@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 
 public class TesteConexao {
     public static void main (String[] args){
-        final String URL = "jdbc:postgresql://localhost:5432/progii_bd";
-        final String USUARIO = "postgres";
-        final String SENHA = "postgres";
+        final String URL        = "jdbc:postgresql://localhost:5432/progii_bd";
+        final String USUARIO    = "postgres";
+        final String SENHA      = "postgres";
         
         Connection conexao;
     
