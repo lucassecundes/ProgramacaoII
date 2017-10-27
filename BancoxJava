@@ -1,3 +1,5 @@
+create database progii_bd
+
 select * from tb_usuario where nome
 
 select nome from tb_usuario
