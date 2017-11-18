@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package progii_nome_lucas;
+package progii_lucas_secundes;
+
+import dao.EnderecoDAO;
+import model.Endereco;
 
 /**
  *
@@ -38,6 +41,11 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         txtBairro = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
         txtCep = new javax.swing.JTextField();
+        jbCancelar = new javax.swing.JButton();
+        jbExcluir = new javax.swing.JButton();
+        jbSelecionar = new javax.swing.JButton();
+        jbAlterar = new javax.swing.JButton();
+        jbCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +74,21 @@ public class CadastrarEndereco extends javax.swing.JFrame {
             }
         });
 
+        jbCancelar.setText("Cancelar");
+
+        jbExcluir.setText("Excluir");
+
+        jbSelecionar.setText("Selecionar");
+
+        jbAlterar.setText("Alterar");
+
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,7 +105,7 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                             .addComponent(jlbLogradouro))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLogradouro, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                            .addComponent(txtLogradouro, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                             .addComponent(txtComplemento)
                             .addComponent(txtBairro)
                             .addComponent(txtNumero)
@@ -91,6 +114,18 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                         .addGap(168, 168, 168)
                         .addComponent(jLabel1)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jbCadastrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbAlterar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSelecionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCancelar)
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +152,14 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblCep)
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCancelar)
+                    .addComponent(jbExcluir)
+                    .addComponent(jbSelecionar)
+                    .addComponent(jbAlterar)
+                    .addComponent(jbCadastrar))
+                .addContainerGap())
         );
 
         pack();
@@ -129,6 +171,17 @@ public class CadastrarEndereco extends javax.swing.JFrame {
 
     private void txtComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComplementoActionPerformed
     }//GEN-LAST:event_txtComplementoActionPerformed
+
+    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
+        
+        Endereco e       = new Endereco();
+        EnderecoDAO dao  = new EnderecoDAO();
+        e.setLogradouro(txtLogradouro.getText());
+        e.setComplemento(txtComplemento.getText());
+        e.setBairro(txtBairro.getText());
+        e.setNumero(txtNumero.getText());
+        e.setCep(txtCep.getText());
+    }//GEN-LAST:event_jbCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +221,11 @@ public class CadastrarEndereco extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbExcluir;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jblCep;
     private javax.swing.JLabel jblComplemento;
     private javax.swing.JLabel jblNumero;

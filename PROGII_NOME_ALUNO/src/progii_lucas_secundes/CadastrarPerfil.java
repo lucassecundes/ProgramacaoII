@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package progii_nome_lucas;
+package progii_lucas_secundes;
 
 /**
  *
@@ -32,6 +32,11 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         jblDescricao = new javax.swing.JLabel();
         txtNomeP = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
+        jbCadastrar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbSelecionar = new javax.swing.JButton();
+        jbAlterar = new javax.swing.JButton();
+        jbExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +46,26 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         jlbNomeP.setText("Nome");
 
         jblDescricao.setText("Descrição");
+
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarActionPerformed(evt);
+            }
+        });
+
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
+        jbSelecionar.setText("Selecionar");
+
+        jbAlterar.setText("Alterar");
+
+        jbExcluir.setText("Excluir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,7 +77,7 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jlbNomeP)
                         .addGap(27, 27, 27)
-                        .addComponent(txtNomeP, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                        .addComponent(txtNomeP, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(jLabel1))
@@ -60,7 +85,18 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jblDescricao)
                         .addGap(8, 8, 8)
-                        .addComponent(txtDescricao)))
+                        .addComponent(txtDescricao))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSelecionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbCancelar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,11 +112,26 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblDescricao)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCadastrar)
+                    .addComponent(jbCancelar)
+                    .addComponent(jbSelecionar)
+                    .addComponent(jbAlterar)
+                    .addComponent(jbExcluir))
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,6 +170,11 @@ public class CadastrarPerfil extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbExcluir;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jblDescricao;
     private javax.swing.JLabel jlbNomeP;
     private javax.swing.JTextField txtDescricao;

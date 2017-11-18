@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package progii_nome_lucas;
+package progii_lucas_secundes;
 
 import javax.swing.JFrame;
 
