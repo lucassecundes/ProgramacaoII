@@ -8,7 +8,9 @@ package dao;
 import connection.ConnectionSql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -47,6 +49,31 @@ public class EnderecoDAO {
 
     }
 
+       public List<Endereco> read(){
+           
+        con = (Connection) ConnectionSql.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM endereco");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()){
+            
+                Endereco endereco = new Endereco();
+                
+                endereco.setIdEndereco(rs.getInt("idEndereco"));
+                endereco.setLogradouro(rs.getString("Logradouro"));
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+       }
     
     
 }
