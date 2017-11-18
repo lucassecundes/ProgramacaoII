@@ -6,6 +6,7 @@
 package progii_lucas_secundes;
 
 import dao.EnderecoDAO;
+import javax.swing.JFrame;
 import model.Endereco;
 
 /**
@@ -75,6 +76,11 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         });
 
         jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
 
         jbExcluir.setText("Excluir");
 
@@ -181,7 +187,14 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         e.setBairro(txtBairro.getText());
         e.setNumero(txtNumero.getText());
         e.setCep(txtCep.getText());
+        
+        dao.create(e);
     }//GEN-LAST:event_jbCadastrarActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        
+      
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
     /**
      * @param args the command line arguments
