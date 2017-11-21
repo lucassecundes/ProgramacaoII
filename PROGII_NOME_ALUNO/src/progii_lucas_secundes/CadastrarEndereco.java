@@ -7,6 +7,9 @@ package progii_lucas_secundes;
 
 import dao.EnderecoDAO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Endereco;
 
 /**
@@ -20,6 +23,33 @@ public class CadastrarEndereco extends javax.swing.JFrame {
      */
     public CadastrarEndereco() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) jTEndereco.getModel();
+        jTEndereco.setRowSorter(new TableRowSorter(modelo));
+
+        readJTable();
+
+    }
+
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) jTEndereco.getModel();
+        modelo.setNumRows(0);
+
+        EnderecoDAO edao = new EnderecoDAO();
+
+        for (Endereco e : edao.read()) {
+
+            modelo.addRow(new Object[]{
+                e.getIdEndereco(),
+                e.getLogradouro(),
+                e.getComplemento(),
+                e.getBairro(),
+                e.getNumero(),
+                e.getCep()
+
+            });
+
+        }
+
     }
 
     /**
@@ -47,6 +77,8 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         jbSelecionar = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbCadastrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTEndereco = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +115,20 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         });
 
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbSelecionar.setText("Selecionar");
 
         jbAlterar.setText("Alterar");
+        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlterarActionPerformed(evt);
+            }
+        });
 
         jbCadastrar.setText("Cadastrar");
         jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +136,34 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                 jbCadastrarActionPerformed(evt);
             }
         });
+
+        jTEndereco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "IdEndereco", "Logradouro", "Complemento", "Bairro", "Numero", "Cep"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTEndereco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEnderecoMouseClicked(evt);
+            }
+        });
+        jTEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTEnderecoKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTEndereco);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,17 +181,20 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                             .addComponent(jlbLogradouro))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLogradouro, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                            .addComponent(txtLogradouro)
                             .addComponent(txtComplemento)
                             .addComponent(txtBairro)
-                            .addComponent(txtNumero)
-                            .addComponent(txtCep)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(168, 168, 168)
                         .addComponent(jLabel1)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbAlterar)
@@ -132,6 +205,9 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCancelar)
                 .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +234,9 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblCep)
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
                     .addComponent(jbExcluir)
@@ -179,22 +257,109 @@ public class CadastrarEndereco extends javax.swing.JFrame {
     }//GEN-LAST:event_txtComplementoActionPerformed
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        
-        Endereco e       = new Endereco();
-        EnderecoDAO dao  = new EnderecoDAO();
+
+        Endereco e = new Endereco();
+        EnderecoDAO dao = new EnderecoDAO();
         e.setLogradouro(txtLogradouro.getText());
         e.setComplemento(txtComplemento.getText());
         e.setBairro(txtBairro.getText());
         e.setNumero(txtNumero.getText());
         e.setCep(txtCep.getText());
-        
+
         dao.create(e);
+
+        txtLogradouro.setText("");
+        txtComplemento.setText("");
+        txtBairro.setText("");
+        txtNumero.setText("");
+        txtCep.setText("");
+
+        readJTable();
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        
-      
+
+
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jTEnderecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEnderecoKeyReleased
+
+        if (jTEndereco.getSelectedRow() != -1) {
+
+            txtLogradouro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 1).toString());
+            txtComplemento.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 2).toString());
+            txtBairro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+
+        }
+
+    }//GEN-LAST:event_jTEnderecoKeyReleased
+
+    private void jTEnderecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEnderecoMouseClicked
+
+        if (jTEndereco.getSelectedRow() != -1) {
+
+            txtLogradouro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 1).toString());
+            txtComplemento.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 2).toString());
+            txtBairro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+
+        }
+
+    }//GEN-LAST:event_jTEnderecoMouseClicked
+
+    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+
+        if (jTEndereco.getSelectedRow() != -1) {
+
+            Endereco e = new Endereco();
+            EnderecoDAO dao = new EnderecoDAO();
+            e.setLogradouro(txtLogradouro.getText());
+            e.setComplemento(txtComplemento.getText());
+            e.setBairro(txtBairro.getText());
+            e.setNumero(txtNumero.getText());
+            e.setCep(txtCep.getText());
+            e.setIdEndereco((int)jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 0));
+            dao.update(e);
+
+            txtLogradouro.setText("");
+            txtComplemento.setText("");
+            txtBairro.setText("");
+            txtNumero.setText("");
+            txtCep.setText("");
+
+            readJTable();
+
+        }
+    }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        
+        if (jTEndereco.getSelectedRow() != -1) {
+
+            Endereco e = new Endereco();
+            EnderecoDAO dao = new EnderecoDAO();
+
+            e.setIdEndereco((int) jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 0));
+            
+            dao.delete(e);
+
+            txtLogradouro.setText("");
+            txtComplemento.setText("");
+            txtBairro.setText("");
+            txtNumero.setText("");
+            txtCep.setText("");
+
+            readJTable();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para deletar.");
+        }
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,6 +399,8 @@ public class CadastrarEndereco extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTEndereco;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;

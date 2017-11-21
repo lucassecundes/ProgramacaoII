@@ -5,25 +5,26 @@
  */
 package model;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+
 /**
  *
  * @author lucas
  */
 public class Endereco {
-    
-    private int idEndereco;
+    private int IdEndereco;
     private String logradouro;
     private String bairro;
     private String complemento;
     private String numero;
     private String cep;
 
-    public int getId_endereco() {
-        return idEndereco;
+    public int getIdEndereco() {
+        return IdEndereco;
     }
 
-    public void setId_endereco(int id_endereco) {
-        this.idEndereco = id_endereco;
+    public void setIdEndereco(int IdEndereco) {
+        this.IdEndereco = IdEndereco;
     }
 
     public String getLogradouro() {

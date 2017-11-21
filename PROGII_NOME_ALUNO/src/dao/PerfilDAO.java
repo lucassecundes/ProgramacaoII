@@ -15,29 +15,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Endereco;
+import model.Perfil;
 
 /**
  *
  * @author lucas
  */
-public class EnderecoDAO {
-
+public class PerfilDAO {
     Connection con;
-
-    public void create(Endereco e) {
+    
+     public void create(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO endereco (logradouro,complemento,bairro,numero,cep)VALUES(?,?,?,?,?)");
-            stmt.setString(1, e.getLogradouro());
-            stmt.setString(2, e.getComplemento());
-            stmt.setString(3, e.getBairro());
-            stmt.setString(4, e.getNumero());
-            stmt.setString(5, e.getCep());
+            stmt = con.prepareStatement("INSERT INTO perfil (nome,descricao)VALUES(?,?)");
+            stmt.setString(1, p.getNome());
+            stmt.setString(2, p.getDescricao());
+            
 
             stmt.executeUpdate();
 
@@ -49,59 +46,50 @@ public class EnderecoDAO {
         }
 
     }
-
-    public List<Endereco> read() {
-
+    
+    public List<Perfil> read() {
+        
         con = (Connection) ConnectionSql.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Endereco> enderecos = new ArrayList<>();
+        List<Perfil> perfils = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM endereco");
+            stmt = con.prepareStatement("SELECT * FROM perfil");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Endereco endereco = new Endereco();
+                Perfil perfil = new Perfil();
 
-                endereco.setIdEndereco(rs.getInt("IdEndereco"));
-                endereco.setLogradouro(rs.getString("Logradouro"));
-                endereco.setBairro(rs.getString("Bairro"));
-                endereco.setComplemento(rs.getString("Complemento"));
-                endereco.setNumero(rs.getString("Numero"));
-                endereco.setCep(rs.getString("Cep"));
-                enderecos.add(endereco);
-
+                perfil.setIdPerfil(rs.getInt("idPerfil"));
+                perfil.setNome(rs.getString("Nome"));
+                perfil.setDescricao(rs.getString("Descricao"));
+                
+                perfils.add(perfil);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
-
+            Logger.getLogger(PerfilDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionSql.closeConnection(con, stmt, rs);
-
         }
 
-        return enderecos;
+        return perfils;
 
     }
-
-    public void update(Endereco e) {
+    public void update(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE endereco SET logradouro = ?,complemento = ?,bairro = ?,numero = ?,cep = ? WHERE idEndereco = ?");
-            stmt.setString(1, e.getLogradouro());
-            stmt.setString(2, e.getComplemento());
-            stmt.setString(3, e.getBairro());
-            stmt.setString(4, e.getNumero());
-            stmt.setString(5, e.getCep());
-            stmt.setInt(6, e.getIdEndereco());
+            stmt = con.prepareStatement("UPDATE perfil SET nome = ?,descricao = ? WHERE idPerfil = ?");
+            stmt.setString(1, p.getNome());
+            stmt.setString(2, p.getDescricao());
+            stmt.setInt(3, p.getIdPerfil());
 
             stmt.executeUpdate();
 
@@ -113,15 +101,15 @@ public class EnderecoDAO {
         }
 
     }
-    public void delete(Endereco e) {
+    public void delete(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM endereco  WHERE idEndereco = ?");
-            stmt.setInt(1, e.getIdEndereco());
+            stmt = con.prepareStatement("DELETE FROM perfil  WHERE idPerfil = ?");
+            stmt.setInt(1, p.getIdPerfil());
 
             stmt.executeUpdate();
 
@@ -131,7 +119,7 @@ public class EnderecoDAO {
         } finally {
             ConnectionSql.closeConnection(con, stmt);
         }
-
+    
+    
     }
-
 }

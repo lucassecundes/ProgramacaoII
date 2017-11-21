@@ -11,16 +11,16 @@ package model;
  */
 public class Perfil {
   
-    private int id_perfil;
+    private int IdPerfil;
     private String nome;
     private String descricao;
 
-    public int getId_perfil() {
-        return id_perfil;
+    public int getIdPerfil() {
+        return IdPerfil;
     }
 
-    public void setId_perfil(int id_perfil) {
-        this.id_perfil = id_perfil;
+    public void setIdPerfil(int IdPerfil) {
+        this.IdPerfil = IdPerfil;
     }
 
     public String getNome() {

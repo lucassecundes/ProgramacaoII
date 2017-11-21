@@ -5,6 +5,13 @@
  */
 package progii_lucas_secundes;
 
+
+import dao.PerfilDAO;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.Perfil;
+
 /**
  *
  * @author aluno
@@ -16,6 +23,29 @@ public class CadastrarPerfil extends javax.swing.JFrame {
      */
     public CadastrarPerfil() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) jTPerfil.getModel();
+        jTPerfil.setRowSorter(new TableRowSorter(modelo));
+
+        readJTable();
+    }
+    
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) jTPerfil.getModel();
+        modelo.setNumRows(0);
+
+        PerfilDAO pdao = new PerfilDAO();
+
+        for (Perfil p : pdao.read()) {
+
+            modelo.addRow(new Object[]{
+                p.getNome(),
+                p.getDescricao()
+                
+
+            });
+
+        }
+
     }
 
     /**
@@ -30,13 +60,14 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jlbNomeP = new javax.swing.JLabel();
         jblDescricao = new javax.swing.JLabel();
-        txtNomeP = new javax.swing.JTextField();
-        txtDescricao = new javax.swing.JTextField();
+        txtNomep = new javax.swing.JTextField();
+        txtDescricaop = new javax.swing.JTextField();
         jbCadastrar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jbSelecionar = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTPerfil = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +92,47 @@ public class CadastrarPerfil extends javax.swing.JFrame {
             }
         });
 
-        jbSelecionar.setText("Selecionar");
-
         jbAlterar.setText("Alterar");
+        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlterarActionPerformed(evt);
+            }
+        });
 
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jTPerfil.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "idPerfil", "Nome", "Descricao"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTPerfilMouseClicked(evt);
+            }
+        });
+        jTPerfil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTPerfilKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTPerfil);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,29 +141,30 @@ public class CadastrarPerfil extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlbNomeP)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtNomeP, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel1))
+                        .addGap(274, 274, 274)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jblDescricao)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtDescricao))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbSelecionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbCancelar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbCadastrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbCancelar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jblDescricao)
+                                    .addComponent(jlbNomeP))
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomep)
+                                    .addComponent(txtDescricaop)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,16 +175,17 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbNomeP)
-                    .addComponent(txtNomeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblDescricao)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addComponent(txtDescricaop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCadastrar)
                     .addComponent(jbCancelar)
-                    .addComponent(jbSelecionar)
                     .addComponent(jbAlterar)
                     .addComponent(jbExcluir))
                 .addGap(24, 24, 24))
@@ -130,8 +199,98 @@ public class CadastrarPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        // TODO add your handling code here:
+        
+        Perfil p = new Perfil();
+        PerfilDAO dao = new PerfilDAO();
+        p.setNome(txtNomep.getText());
+        p.setDescricao(txtDescricaop.getText());
+        
+
+        dao.create(p);
+
+        txtNomep.setText("");
+        txtDescricaop.setText("");
+        
+
+        readJTable();
+                
+        
+        
     }//GEN-LAST:event_jbCadastrarActionPerformed
+
+    private void jTPerfilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPerfilKeyReleased
+       
+        if (jTPerfil.getSelectedRow() != -1) {
+
+            txtNomep.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 1).toString());
+            txtDescricaop.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 2).toString());
+            
+
+        }
+        
+        
+    }//GEN-LAST:event_jTPerfilKeyReleased
+
+    private void jTPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPerfilMouseClicked
+        
+        if (jTPerfil.getSelectedRow() != -1) {
+
+            txtNomep.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 1).toString());
+            txtDescricaop.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 2).toString());
+
+
+        }
+        
+        
+        
+    }//GEN-LAST:event_jTPerfilMouseClicked
+
+    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+        
+        if (jTPerfil.getSelectedRow() != -1) {
+
+            Perfil p = new Perfil();
+            PerfilDAO dao = new PerfilDAO();
+            p.setNome(txtNomep.getText());
+            p.setDescricao(txtDescricaop.getText());
+            p.setIdPerfil((int)jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 0));
+           
+            dao.update(p);
+
+            txtNomep.setText("");
+            txtDescricaop.setText("");
+           
+
+            readJTable();
+
+        }
+        
+        
+        
+    }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+       
+         if (jTPerfil.getSelectedRow() != -1) {
+
+            Perfil p = new Perfil();
+            PerfilDAO dao = new PerfilDAO();
+
+            p.setIdPerfil((int) jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 0));
+            
+            dao.delete(p);
+
+            txtNomep.setText("");
+            txtDescricaop.setText("");
+            
+            readJTable();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para deletar.");
+        }
+        
+        
+    }//GEN-LAST:event_jbExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,14 +329,15 @@ public class CadastrarPerfil extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTPerfil;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExcluir;
-    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jblDescricao;
     private javax.swing.JLabel jlbNomeP;
-    private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtNomeP;
+    private javax.swing.JTextField txtDescricaop;
+    private javax.swing.JTextField txtNomep;
     // End of variables declaration//GEN-END:variables
 }
