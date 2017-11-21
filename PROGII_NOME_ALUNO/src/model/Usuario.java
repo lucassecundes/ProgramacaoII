@@ -11,18 +11,17 @@ package model;
  */
 public class Usuario {
     
-    private int id_usuario;
+    private int idUsuario;
     private String nome;
     private String sobrenome;
-    private Endereco endereco;
-    private Perfil perfil;
+ 
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -41,22 +40,5 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }
-    
-    
-    
 }

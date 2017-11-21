@@ -138,5 +138,44 @@ public class EnderecoDAO {
         }
 
     }
+    
+    public List<Endereco> readForEndereco(String Endereco) {
+
+        con = (Connection) ConnectionSql.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Endereco> enderecos = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM endereco WHERE Logradouro LIKE ?");
+            stmt.setString(1, "%"+Endereco+"%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Endereco endereco = new Endereco();
+
+                endereco.setIdEndereco(rs.getInt("IdEndereco"));
+                endereco.setLogradouro(rs.getString("Logradouro"));
+                endereco.setBairro(rs.getString("Bairro"));
+                endereco.setComplemento(rs.getString("Complemento"));
+                endereco.setNumero(rs.getString("Numero"));
+                endereco.setCep(rs.getString("Cep"));
+                enderecos.add(endereco);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EnderecoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            ConnectionSql.closeConnection(con, stmt, rs);
+
+        }
+
+        return enderecos;
+
+    }
 
 }

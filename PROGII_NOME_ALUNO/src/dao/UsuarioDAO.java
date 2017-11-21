@@ -15,27 +15,27 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Perfil;
+import model.Usuario;
 
 /**
  *
  * @author lucas
  */
-public class PerfilDAO {
+public class UsuarioDAO {
 
     Connection con;
 
-    public void create(Perfil p) {
+    public void create(Usuario u) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO perfil "
-                    + "(nome,descricao)VALUES(?,?)");
-            stmt.setString(1, p.getNome());
-            stmt.setString(2, p.getDescricao());
+            stmt = con.prepareStatement("INSERT INTO usuario "
+                    + "(nome,sobrenome)VALUES(?,?)");
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getSobrenome());
 
             stmt.executeUpdate();
 
@@ -48,27 +48,27 @@ public class PerfilDAO {
 
     }
 
-    public List<Perfil> read() {
+    public List<Usuario> read() {
 
         con = (Connection) ConnectionSql.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Perfil> perfils = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM perfil");
+            stmt = con.prepareStatement("SELECT * FROM usuario");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Perfil perfil = new Perfil();
+                Usuario usuario = new Usuario();
 
-                perfil.setIdPerfil(rs.getInt("idPerfil"));
-                perfil.setNome(rs.getString("Nome"));
-                perfil.setDescricao(rs.getString("Descricao"));
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNome(rs.getString("Nome"));
+                usuario.setSobrenome(rs.getString("Sobrenome"));
 
-                perfils.add(perfil);
+                usuarios.add(usuario);
             }
 
         } catch (SQLException ex) {
@@ -77,22 +77,22 @@ public class PerfilDAO {
             ConnectionSql.closeConnection(con, stmt, rs);
         }
 
-        return perfils;
+        return usuarios;
 
     }
 
-    public void update(Perfil p) {
+    public void update(Usuario u) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE perfil SET "
-                    + "nome = ?,descricao = ? WHERE idPerfil = ?");
-            stmt.setString(1, p.getNome());
-            stmt.setString(2, p.getDescricao());
-            stmt.setInt(3, p.getIdPerfil());
+            stmt = con.prepareStatement("UPDATE usuario SET "
+                    + "nome = ?,sobrenome = ? WHERE idUsuario = ?");
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getSobrenome());
+            stmt.setInt(3, u.getIdUsuario());
 
             stmt.executeUpdate();
 
@@ -105,16 +105,16 @@ public class PerfilDAO {
 
     }
 
-    public void delete(Perfil p) {
+    public void delete(Usuario u) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM perfil  "
-                    + "WHERE idPerfil = ?");
-            stmt.setInt(1, p.getIdPerfil());
+            stmt = con.prepareStatement("DELETE FROM usuario  "
+                    + "WHERE idUsuario = ?");
+            stmt.setInt(1, u.getIdUsuario());
 
             stmt.executeUpdate();
 
@@ -126,29 +126,29 @@ public class PerfilDAO {
         }
 
     }
-    
-    public List<Perfil> readForNome(String nome) {
+
+    public List<Usuario> readForNome(String nome) {
 
         con = (Connection) ConnectionSql.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Perfil> perfils = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM perfil WHERE nome LIKE ?");
-            stmt.setString(1, "%"+nome+"%");
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE nome LIKE ?");
+            stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Perfil perfil = new Perfil();
+                Usuario usuario = new Usuario();
 
-                perfil.setIdPerfil(rs.getInt("idPerfil"));
-                perfil.setNome(rs.getString("Nome"));
-                perfil.setDescricao(rs.getString("Descricao"));
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNome(rs.getString("Nome"));
+                usuario.setSobrenome(rs.getString("Sobrenome"));
 
-                perfils.add(perfil);
+                usuarios.add(usuario);
             }
 
         } catch (SQLException ex) {
@@ -157,7 +157,7 @@ public class PerfilDAO {
             ConnectionSql.closeConnection(con, stmt, rs);
         }
 
-        return perfils;
+        return usuarios;
 
     }
 }

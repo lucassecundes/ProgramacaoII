@@ -51,6 +51,28 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         }
 
     }
+    
+    public void readJTableForEndereco(String endereco) {
+        DefaultTableModel modelo = (DefaultTableModel) jTEndereco.getModel();
+        modelo.setNumRows(0);
+
+        EnderecoDAO edao = new EnderecoDAO();
+
+        for (Endereco e : edao.readForEndereco(endereco)) {
+
+            modelo.addRow(new Object[]{
+                e.getIdEndereco(),
+                e.getLogradouro(),
+                e.getComplemento(),
+                e.getBairro(),
+                e.getNumero(),
+                e.getCep()
+
+            });
+
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,11 +96,13 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         txtCep = new javax.swing.JTextField();
         jbCancelar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
-        jbSelecionar = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbCadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTEndereco = new javax.swing.JTable();
+        jlbBusca = new javax.swing.JLabel();
+        txtBusca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +145,12 @@ public class CadastrarEndereco extends javax.swing.JFrame {
             }
         });
 
-        jbSelecionar.setText("Selecionar");
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbAlterar.setText("Alterar");
         jbAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,14 +194,30 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTEndereco);
 
+        jlbBusca.setText("Busca Logradouro");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbCancelar)
+                        .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jblComplemento)
                             .addComponent(jlbBairro)
@@ -186,35 +231,30 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                             .addComponent(txtBairro)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtCep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                    .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
+                                    .addComponent(txtCep, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbCadastrar)
+                .addComponent(jlbBusca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbAlterar)
+                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSelecionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCancelar)
-                .addGap(43, 43, 43))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))
+                .addComponent(jbBuscar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGap(7, 7, 7)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbLogradouro)
                     .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,17 +270,16 @@ public class CadastrarEndereco extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jblNumero)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblCep)
                     .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
                     .addComponent(jbExcluir)
-                    .addComponent(jbSelecionar)
                     .addComponent(jbAlterar)
                     .addComponent(jbCadastrar))
                 .addContainerGap())
@@ -361,6 +400,15 @@ public class CadastrarEndereco extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbExcluirActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+         
+        readJTableForEndereco(txtBusca.getText());
+        
+        
+        
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,16 +450,18 @@ public class CadastrarEndereco extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTEndereco;
     private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExcluir;
-    private javax.swing.JButton jbSelecionar;
     private javax.swing.JLabel jblCep;
     private javax.swing.JLabel jblComplemento;
     private javax.swing.JLabel jblNumero;
     private javax.swing.JLabel jlbBairro;
+    private javax.swing.JLabel jlbBusca;
     private javax.swing.JLabel jlbLogradouro;
     private javax.swing.JTextField txtBairro;
+    private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtLogradouro;

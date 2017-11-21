@@ -49,6 +49,26 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         }
 
     }
+    
+    public void readJTableForPerfil(String perfil) {
+        DefaultTableModel modelo = (DefaultTableModel) jTPerfil.getModel();
+        modelo.setNumRows(0);
+
+        PerfilDAO pdao = new PerfilDAO();
+
+        for (Perfil p : pdao.readForNome(perfil)) {
+
+            modelo.addRow(new Object[]{
+                p.getIdPerfil(),
+                p.getNome(),
+                p.getDescricao()
+                
+
+            });
+
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +90,9 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPerfil = new javax.swing.JTable();
+        jlbBusca = new javax.swing.JLabel();
+        txtBusca = new javax.swing.JTextField();
+        butBusca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,16 +159,21 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTPerfil);
 
+        jlbBusca.setText("Buscar Nome");
+
+        butBusca.setText("Buscar");
+        butBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butBuscaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +192,20 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                                     .addComponent(jlbNomeP))
                                 .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNomep)
-                                    .addComponent(txtDescricaop)))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
+                                    .addComponent(txtDescricaop)
+                                    .addComponent(txtNomep)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(274, 274, 274)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jlbBusca)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(butBusca)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,6 +213,11 @@ public class CadastrarPerfil extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbBusca)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(butBusca))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbNomeP)
@@ -182,7 +226,7 @@ public class CadastrarPerfil extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jblDescricao)
                     .addComponent(txtDescricaop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,6 +343,14 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbExcluirActionPerformed
 
+    private void butBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butBuscaActionPerformed
+        
+        
+        readJTableForPerfil(txtBusca.getText());
+        
+        
+    }//GEN-LAST:event_butBuscaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,6 +387,7 @@ public class CadastrarPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butBusca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTPerfil;
@@ -343,7 +396,9 @@ public class CadastrarPerfil extends javax.swing.JFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JLabel jblDescricao;
+    private javax.swing.JLabel jlbBusca;
     private javax.swing.JLabel jlbNomeP;
+    private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtDescricaop;
     private javax.swing.JTextField txtNomep;
     // End of variables declaration//GEN-END:variables
