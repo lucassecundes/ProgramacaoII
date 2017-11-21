@@ -32,7 +32,9 @@ public class EnderecoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO endereco (logradouro,complemento,bairro,numero,cep)VALUES(?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO endereco "
+                                        + "(logradouro,complemento,bairro,numero,cep)"
+                                        + "VALUES(?,?,?,?,?)");
             stmt.setString(1, e.getLogradouro());
             stmt.setString(2, e.getComplemento());
             stmt.setString(3, e.getBairro());
@@ -95,7 +97,9 @@ public class EnderecoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE endereco SET logradouro = ?,complemento = ?,bairro = ?,numero = ?,cep = ? WHERE idEndereco = ?");
+            stmt = con.prepareStatement("UPDATE endereco "
+                                        +"SET logradouro = ?,complemento = ?,bairro = ?,numero = ?,cep = ? "
+                                        +"WHERE idEndereco = ?");
             stmt.setString(1, e.getLogradouro());
             stmt.setString(2, e.getComplemento());
             stmt.setString(3, e.getBairro());
@@ -120,7 +124,8 @@ public class EnderecoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM endereco  WHERE idEndereco = ?");
+            stmt = con.prepareStatement("DELETE FROM endereco  "
+                                        +"WHERE idEndereco = ?");
             stmt.setInt(1, e.getIdEndereco());
 
             stmt.executeUpdate();

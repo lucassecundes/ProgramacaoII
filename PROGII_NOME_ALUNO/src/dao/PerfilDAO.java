@@ -22,19 +22,20 @@ import model.Perfil;
  * @author lucas
  */
 public class PerfilDAO {
+
     Connection con;
-    
-     public void create(Perfil p) {
+
+    public void create(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO perfil (nome,descricao)VALUES(?,?)");
+            stmt = con.prepareStatement("INSERT INTO perfil "
+                    + "(nome,descricao)VALUES(?,?)");
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getDescricao());
-            
 
             stmt.executeUpdate();
 
@@ -46,9 +47,9 @@ public class PerfilDAO {
         }
 
     }
-    
+
     public List<Perfil> read() {
-        
+
         con = (Connection) ConnectionSql.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -66,7 +67,7 @@ public class PerfilDAO {
                 perfil.setIdPerfil(rs.getInt("idPerfil"));
                 perfil.setNome(rs.getString("Nome"));
                 perfil.setDescricao(rs.getString("Descricao"));
-                
+
                 perfils.add(perfil);
             }
 
@@ -79,6 +80,7 @@ public class PerfilDAO {
         return perfils;
 
     }
+
     public void update(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
@@ -86,7 +88,8 @@ public class PerfilDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE perfil SET nome = ?,descricao = ? WHERE idPerfil = ?");
+            stmt = con.prepareStatement("UPDATE perfil SET "
+                    + "nome = ?,descricao = ? WHERE idPerfil = ?");
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getDescricao());
             stmt.setInt(3, p.getIdPerfil());
@@ -101,6 +104,7 @@ public class PerfilDAO {
         }
 
     }
+
     public void delete(Perfil p) {
 
         con = (Connection) ConnectionSql.getConnection();
@@ -119,7 +123,6 @@ public class PerfilDAO {
         } finally {
             ConnectionSql.closeConnection(con, stmt);
         }
-    
-    
+
     }
 }

@@ -7,6 +7,7 @@ package progii_lucas_secundes;
 
 
 import dao.PerfilDAO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -38,6 +39,7 @@ public class CadastrarPerfil extends javax.swing.JFrame {
         for (Perfil p : pdao.read()) {
 
             modelo.addRow(new Object[]{
+                p.getIdPerfil(),
                 p.getNome(),
                 p.getDescricao()
                 
@@ -195,7 +197,12 @@ public class CadastrarPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        // TODO add your handling code here:
+      
+        
+        /**CadastrarPerfil cadastrarPerfil  = new CadastrarPerfil();
+        cadastrarPerfil.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        cadastrarPerfil.setVisible(true);
+        */
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
@@ -222,7 +229,7 @@ public class CadastrarPerfil extends javax.swing.JFrame {
        
         if (jTPerfil.getSelectedRow() != -1) {
 
-            txtNomep.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 1).toString());
+            txtNomep.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 2).toString());
             txtDescricaop.setText(jTPerfil.getValueAt(jTPerfil.getSelectedRow(), 2).toString());
             
 

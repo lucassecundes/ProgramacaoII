@@ -289,8 +289,8 @@ public class CadastrarEndereco extends javax.swing.JFrame {
             txtLogradouro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 1).toString());
             txtComplemento.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 2).toString());
             txtBairro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
-            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
-            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 4).toString());
+            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 5).toString());
 
         }
 
@@ -303,8 +303,8 @@ public class CadastrarEndereco extends javax.swing.JFrame {
             txtLogradouro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 1).toString());
             txtComplemento.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 2).toString());
             txtBairro.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
-            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
-            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 3).toString());
+            txtNumero.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 4).toString());
+            txtCep.setText(jTEndereco.getValueAt(jTEndereco.getSelectedRow(), 5).toString());
 
         }
 
